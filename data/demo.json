@@ -1,0 +1,134 @@
+{
+  "tickets": [
+    {
+      "id": "SUP-4821",
+      "issue_key": "mfa-phone-migration",
+      "subject": "Authenticator code rejected after phone migration",
+      "symptoms": "Authenticator codes are rejected after moving to a new phone.",
+      "cause": "The previous authenticator credential remained attached to the user profile.",
+      "steps": ["Open Admin > Users and select the affected user.", "In Security, remove the previous authenticator credential.", "Ask the user to enroll the authenticator app again on the new phone."],
+      "verification": "Have the user sign in with a newly generated code and confirm the recovery codes are available.",
+      "resolution_notes": "Removed the prior authenticator credential from the user Security profile, then re-enrolled the app on the replacement phone. User signed in successfully with a new code.",
+      "product_version": "6.8",
+      "resolved_at": "2026-11-15"
+    },
+    {
+      "id": "SUP-4836",
+      "issue_key": "mfa-phone-migration",
+      "subject": "Authenticator code rejected after phone migration",
+      "symptoms": "The new phone's one-time passcodes fail during sign-in.",
+      "cause": "An old device enrollment was still active for the account.",
+      "steps": ["Remove the old authenticator enrollment from the user's Security settings.", "Start MFA enrollment again and scan the new QR code.", "Save a fresh set of recovery codes."],
+      "verification": "A fresh one-time passcode completes sign-in.",
+      "resolution_notes": "Deleted the old MFA device entry, re-enrolled from the new phone and saved replacement recovery codes. Confirmed sign-in with a fresh passcode.",
+      "product_version": "6.8",
+      "resolved_at": "2026-11-12"
+    },
+    {
+      "id": "SUP-4899",
+      "issue_key": "mfa-phone-migration",
+      "subject": "Authenticator code rejected after phone migration",
+      "symptoms": "Sign-in says the verification code is invalid after the employee changed phones.",
+      "cause": "The account was still paired to the authenticator on the retired device.",
+      "steps": ["In Admin > Users > Security, remove the authenticator linked to the retired phone.", "Enroll the authenticator on the replacement phone.", "Use a newly generated code to sign in."],
+      "verification": "The replacement phone's code is accepted at sign-in.",
+      "resolution_notes": "Cleared the authenticator associated with the retired phone and completed enrollment on the replacement. The new code was accepted.",
+      "product_version": "6.8",
+      "resolved_at": "2026-11-09"
+    },
+    {
+      "id": "SUP-4770",
+      "issue_key": "csv-export-scope",
+      "subject": "CSV export contains only the rows on the current page",
+      "symptoms": "A CSV export omits filtered records beyond the visible page.",
+      "cause": "The export scope was set to Current page instead of All filtered rows.",
+      "steps": ["Open the report and select Export.", "Change Export scope from Current page to All filtered rows.", "Download the CSV again."],
+      "verification": "Compare the exported row count with the filtered result count; all filtered rows should be present.",
+      "resolution_notes": "Changed Export scope to All filtered rows in the export dialog and downloaded again. The file then matched the filtered result count.",
+      "product_version": "6.8",
+      "resolved_at": "2026-11-16"
+    },
+    {
+      "id": "SUP-4802",
+      "issue_key": "csv-export-scope",
+      "subject": "CSV export contains only the rows on the current page",
+      "symptoms": "Downloaded CSV is missing matching records on later pages.",
+      "cause": "The current export dialog defaults to the visible page scope.",
+      "steps": ["In the export dialog, choose All filtered rows for Export scope.", "Download the file after the export completes."],
+      "verification": "The CSV row count equals the number of filtered results, not just the page size.",
+      "resolution_notes": "Selected All filtered rows rather than Current page before downloading. Verified that rows from later pages were included.",
+      "product_version": "6.8",
+      "resolved_at": "2026-11-11"
+    },
+    {
+      "id": "SUP-4854",
+      "issue_key": "csv-export-scope",
+      "subject": "CSV export contains only the rows on the current page",
+      "symptoms": "Exported CSV stops at the visible page although the report has more matches.",
+      "cause": "The export action uses the selected scope, which was Current page.",
+      "steps": ["Select Export from the report.", "Set the scope to All filtered rows.", "Export the report again."],
+      "verification": "Check that exported records include matches from each result page.",
+      "resolution_notes": "Set the export scope to All filtered rows and ran the export again. Confirmed records from all result pages were present.",
+      "product_version": "6.8",
+      "resolved_at": "2026-11-04"
+    },
+    {
+      "id": "SUP-4791",
+      "issue_key": "sso-certificate-rotation",
+      "subject": "SSO login loops after identity provider certificate rotation",
+      "symptoms": "Users return to the sign-in page after authenticating through the identity provider.",
+      "cause": "The service provider still has the previous SAML signing certificate.",
+      "steps": ["Open Admin > Identity > SSO.", "Upload the current IdP signing certificate and confirm the entity ID.", "Invalidate existing sessions."],
+      "verification": "Test the SSO flow in a private browser window and confirm the app landing page opens.",
+      "resolution_notes": "Uploaded the rotated signing certificate in Admin > Identity > SSO, checked the entity ID and invalidated sessions. Verified a clean sign-in in a private window.",
+      "product_version": "6.8",
+      "resolved_at": "2026-11-10"
+    },
+    {
+      "id": "SUP-4868",
+      "issue_key": "sso-certificate-rotation",
+      "subject": "SSO login loops after identity provider certificate rotation",
+      "symptoms": "SSO redirects repeatedly between the app and the identity provider after a certificate update.",
+      "cause": "The configured signing certificate does not match the current IdP certificate.",
+      "steps": ["Replace the signing certificate in Admin > Identity > SSO.", "Check that the entity ID matches the identity provider configuration.", "Clear active sessions and test again."],
+      "verification": "A private-window SSO test reaches the application without returning to sign-in.",
+      "resolution_notes": "Replaced the signing certificate under Admin > Identity > SSO, confirmed entity ID and cleared active sessions. A private-window test succeeded.",
+      "product_version": "6.8",
+      "resolved_at": "2026-11-07"
+    },
+    {
+      "id": "SUP-4883",
+      "issue_key": "sso-certificate-rotation",
+      "subject": "SSO login loops after identity provider certificate rotation",
+      "symptoms": "After the IdP rotates its certificate, SSO authentication returns to the login screen.",
+      "cause": "The old certificate is still configured for the SAML connection.",
+      "steps": ["Upload the current IdP certificate in Admin > Identity > SSO.", "Validate the entity ID, then invalidate existing sessions."],
+      "verification": "Sign in through SSO in a private window and verify the application home page loads.",
+      "resolution_notes": "Updated the SAML signing certificate under Admin > Identity > SSO and invalidated sessions. The private-window check reached the app home page.",
+      "product_version": "6.8",
+      "resolved_at": "2026-11-02"
+    }
+  ],
+  "articles": [
+    {
+      "id": "KB-1182",
+      "issue_key": "csv-export-scope",
+      "title": "Export a report to CSV",
+      "product_version": "6.2",
+      "last_reviewed": "2025-02-18",
+      "body": "In the classic export dialog, choose Current page to export the visible records. The export includes all filtered rows by default.\n\nIf records appear missing, repeat the export from the report toolbar.",
+      "conflict_pairs": [{"article": "current page", "resolution": "all filtered rows"}]
+    },
+    {
+      "id": "KB-1042",
+      "issue_key": "sso-certificate-rotation",
+      "title": "Fix SSO sign-in loops after certificate updates",
+      "product_version": "6.4",
+      "last_reviewed": "2025-01-14",
+      "body": "For a SAML certificate update, open Security > SAML Connections and replace the signing certificate. Confirm the identity provider entity ID, then sign out and test again in a private browser window.\n\nThis article was written for version 6.4.",
+      "conflict_pairs": []
+    }
+  ],
+  "analysis": null,
+  "drafts": []
+}
